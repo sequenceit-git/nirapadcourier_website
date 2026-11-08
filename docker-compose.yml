@@ -5,22 +5,16 @@ services:
   client:
     build: ./client
     restart: unless-stopped
-    networks: [web, internal]
+    networks: [web]
     labels:
       - traefik.enable=true
-      - traefik.docker.network=${TRAEFIK_NETWORK:-traefik}
+      - traefik.docker.network=nirapad-web
       # HTTPS router for the site
       - traefik.http.routers.nirapad-web.rule=Host(`${DOMAIN:?set DOMAIN in .env}`)
       - traefik.http.routers.nirapad-web.entrypoints=${TRAEFIK_ENTRYPOINT:-websecure}
       - traefik.http.routers.nirapad-web.tls=true
       - traefik.http.routers.nirapad-web.tls.certresolver=${CERT_RESOLVER:-letsencrypt}
       - traefik.http.services.nirapad-web.loadbalancer.server.port=80
-      # HTTP -> HTTPS redirect (harmless if you already redirect globally)
-      - traefik.http.routers.nirapad-web-http.rule=Host(`${DOMAIN}`)
-      - traefik.http.routers.nirapad-web-http.entrypoints=${TRAEFIK_HTTP_ENTRYPOINT:-web}
-      - traefik.http.routers.nirapad-web-http.middlewares=nirapad-https
-      - traefik.http.middlewares.nirapad-https.redirectscheme.scheme=https
-      - traefik.http.middlewares.nirapad-https.redirectscheme.permanent=true
 
   api:
     build: ./server
@@ -36,7 +30,7 @@ services:
     networks: [web, internal]
     labels:
       - traefik.enable=true
-      - traefik.docker.network=${TRAEFIK_NETWORK:-traefik}
+      - traefik.docker.network=nirapad-web
       # Same domain, /api goes to the API (the client calls /api/v1 on its own origin)
       - traefik.http.routers.nirapad-api.rule=Host(`${DOMAIN}`) && PathPrefix(`/api`)
       - traefik.http.routers.nirapad-api.priority=100
@@ -62,10 +56,12 @@ services:
       start_period: 20s
 
 networks:
+  # Traefik (even in host network mode) reaches containers by their IP on this network
   web:
-    name: ${TRAEFIK_NETWORK:-traefik}
-    external: true        # the network your Traefik container is attached to
+    name: nirapad-web
+  # API <-> MongoDB only; no outside access
   internal:
+    internal: true
 
 volumes:
   mongo-data:
