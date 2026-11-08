@@ -60,7 +60,7 @@ function ZoneSelect({ value, onChange, label, options }) {
             setOpen((o) => !o);
           }}
           onKeyDown={onKeyDown}
-          className="w-full flex items-center justify-between bg-white text-brand-ink border border-slate-300 rounded-md px-3 py-2.5 text-left focus:outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/30"
+          className="w-full flex items-center justify-between bg-white text-brand-ink border border-slate-300 rounded-md px-3 py-2.5 text-[15px] text-left focus:outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/30"
         >
           <span>{options[selectedIndex].label}</span>
           <ChevronDown className={`w-4 h-4 text-slate-500 transition-transform ${open ? 'rotate-180' : ''}`} aria-hidden="true" />
@@ -109,17 +109,17 @@ export default function CoverageRates() {
   const coverFee = cover ? 1 : 0;
 
   const field =
-    'w-full mt-1.5 bg-white text-brand-ink border border-slate-300 rounded-md px-3 py-2.5 focus:outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/30';
+    'w-full mt-1.5 bg-white text-brand-ink border border-slate-300 rounded-md px-3 py-2.5 text-[15px] focus:outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/30';
 
   return (
-    <section id="coverage" className="bg-white py-20 lg:py-28">
+    <section id="coverage" className="bg-white py-14 lg:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="max-w-3xl font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-[1.1] text-brand-ink">
+        <h2 className="max-w-3xl font-display font-extrabold text-[clamp(26px,3.6vw,42px)] tracking-tight leading-[1.15] text-brand-ink">
           {t('coverage_title')}
         </h2>
-        <p className="mt-4 max-w-xl text-slate-600 leading-relaxed">{t('coverage_desc')}</p>
+        <p className="mt-3 max-w-xl text-[15px] text-slate-600 leading-relaxed">{t('coverage_desc')}</p>
 
-        <div className="mt-12 grid lg:grid-cols-12 gap-12 lg:gap-16">
+        <div className="mt-10 grid lg:grid-cols-12 gap-10 lg:gap-14">
           {/* Rate card */}
           <div className="lg:col-span-7">
             <table className="w-full text-left">
@@ -133,15 +133,15 @@ export default function CoverageRates() {
               <tbody>
                 {ZONES.map((z) => (
                   <tr key={z.id} className="border-b border-slate-200 align-top">
-                    <th scope="row" className="py-6 pr-4 font-normal">
-                      <span className="block font-display font-bold text-xl text-brand-ink">{t(z.tag)}</span>
+                    <th scope="row" className="py-5 pr-4 font-normal">
+                      <span className="block font-display font-bold text-[17px] text-brand-ink">{t(z.tag)}</span>
                       <span className="block mt-1 text-sm text-slate-600 leading-relaxed max-w-sm">{t(z.desc)}</span>
                       <span className="block mt-1 text-sm font-semibold text-brand-green sm:hidden">{t(z.time)}</span>
                     </th>
-                    <td className="py-6 pr-4 hidden sm:table-cell font-semibold text-brand-ink whitespace-nowrap">
+                    <td className="py-5 pr-4 hidden sm:table-cell text-sm font-semibold text-brand-ink whitespace-nowrap">
                       {t(z.time)}
                     </td>
-                    <td className="py-6 text-right font-display font-extrabold text-3xl text-brand-ink whitespace-nowrap">
+                    <td className="py-5 text-right font-display font-extrabold text-[28px] text-brand-ink whitespace-nowrap">
                       ৳ {fmt(z.base)}
                     </td>
                   </tr>
@@ -156,7 +156,7 @@ export default function CoverageRates() {
             onSubmit={(e) => e.preventDefault()}
             className="lg:col-span-5 bg-brand-paper rounded-lg p-6 sm:p-8 border-l-4 border-brand-green"
           >
-            <h3 className="font-display font-bold text-2xl text-brand-ink">{t('calc_title')}</h3>
+            <h3 className="font-display font-bold text-xl text-brand-ink">{t('calc_title')}</h3>
 
             <div className="mt-5 space-y-4">
               <ZoneSelect
@@ -203,13 +203,13 @@ export default function CoverageRates() {
               )}
               <div className="flex justify-between items-baseline pt-2">
                 <dt className="font-bold text-brand-ink">{t('calc_total')}</dt>
-                <dd className="font-display font-extrabold text-3xl text-brand-green">৳ {fmt(delivery + codFee + coverFee)}</dd>
+                <dd className="font-display font-extrabold text-2xl text-brand-green">৳ {fmt(delivery + codFee + coverFee)}</dd>
               </div>
             </dl>
 
             <Link
               to="/register"
-              className="mt-6 block text-center bg-brand-green text-white font-bold py-3 rounded-md hover:bg-brand-dark transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green"
+              className="mt-6 block text-center bg-brand-green text-white text-sm font-bold py-3 rounded-md hover:bg-brand-dark transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green"
             >
               {t('calc_cta')}
             </Link>

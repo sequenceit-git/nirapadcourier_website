@@ -8,7 +8,7 @@ export default function ClientsGrid() {
     <section className="py-16 md:py-20 bg-brand-paper">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-10">
-          <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-brand-ink tracking-tight">
+          <h2 className="font-display text-[clamp(22px,2.6vw,30px)] font-extrabold text-brand-ink tracking-tight">
             {t('brands_title')}
           </h2>
           <p className="text-slate-500 text-xs sm:text-[13px] max-w-xs mt-2 md:mt-0 leading-relaxed font-normal">

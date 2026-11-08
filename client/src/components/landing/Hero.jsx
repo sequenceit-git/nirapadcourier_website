@@ -45,7 +45,7 @@ function WaybillSlip() {
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="text-xs text-slate-500">{t('slip_label')}</p>
-              <p className="font-display font-extrabold text-2xl tracking-tight">{DEMO_CODE}</p>
+              <p className="font-display font-extrabold text-xl tracking-tight">{DEMO_CODE}</p>
             </div>
             <img src="/logo.png" alt="" className="h-8 w-auto" />
           </div>
@@ -122,17 +122,17 @@ export default function Hero() {
   const headLeading = lang === 'bn' ? 'leading-[1.25]' : 'leading-[1.02]';
 
   return (
-    <section id="hero" className="relative overflow-hidden bg-brand-dark text-white pt-32 lg:pt-40">
+    <section id="hero" className="relative overflow-hidden bg-brand-dark text-white pt-28 lg:pt-32">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-8 items-center">
           <div className="lg:col-span-7">
-            <h1 className={`font-display font-extrabold tracking-tight text-5xl sm:text-6xl lg:text-7xl ${headLeading}`}>
+            <h1 className={`font-display font-extrabold tracking-tight text-[clamp(34px,4.4vw,54px)] ${headLeading}`}>
               {t('hero_title_1')}
               <br />
               {t('hero_title_2')}
             </h1>
 
-            <p className="mt-6 max-w-xl text-base sm:text-lg text-white/80 leading-relaxed">
+            <p className="mt-5 max-w-xl text-[clamp(15px,1.4vw,17px)] text-white/80 leading-relaxed">
               {t('hero_desc')}
             </p>
 
@@ -150,18 +150,18 @@ export default function Hero() {
                   value={trackingCode}
                   onChange={(e) => setTrackingCode(e.target.value)}
                   placeholder={t('track_placeholder')}
-                  className="w-full py-3 text-slate-900 font-semibold placeholder:font-normal placeholder:text-slate-400 bg-transparent focus:outline-none"
+                  className="w-full py-3 text-[15px] text-slate-900 font-semibold placeholder:font-normal placeholder:text-slate-400 bg-transparent focus:outline-none"
                 />
               </div>
               <button
                 type="submit"
-                className="bg-brand-red text-white px-6 py-3 rounded-md font-bold hover:bg-red-800 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                className="bg-brand-red text-white px-6 py-3 rounded-md text-sm font-bold hover:bg-red-800 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
                 {t('track_btn')}
               </button>
             </form>
 
-            <p className="mt-3 text-sm text-white/70">
+            <p className="mt-3 text-[13px] text-white/70">
               {t('try_code')}:{' '}
               <button
                 type="button"
@@ -184,10 +184,10 @@ export default function Hero() {
         </div>
 
         {/* Promises and reach, one ruled strip */}
-        <div className="relative mt-16 lg:mt-24 border-t border-white/20 grid grid-cols-1 md:grid-cols-4 gap-x-6">
+        <div className="relative mt-12 lg:mt-16 border-t border-white/20 grid grid-cols-1 md:grid-cols-4 gap-x-6">
           <Truck aria-hidden="true" className="truck-drive -top-[31px] w-8 h-8 text-white/90" strokeWidth={1.5} />
           {['badge_payout', 'badge_cod', 'badge_return', 'badge_cover'].map((k) => (
-            <p key={k} className="py-5 text-sm sm:text-base font-semibold border-b border-white/10 md:border-b-0">
+            <p key={k} className="py-4 text-sm font-semibold border-b border-white/10 md:border-b-0">
               {t(k)}
             </p>
           ))}
@@ -198,8 +198,8 @@ export default function Hero() {
             [1, 'K+', 'stat_merchants'],
             [20, 'K+', 'stat_delivered'],
           ].map(([n, suffix, k], i) => (
-            <div key={k} className={`py-6 ${i ? 'pl-4 sm:pl-8' : ''}`}>
-              <p className="font-display font-extrabold text-2xl sm:text-4xl">
+            <div key={k} className={`py-5 ${i ? 'pl-4 sm:pl-8' : ''}`}>
+              <p className="font-display font-extrabold text-2xl sm:text-[30px]">
                 <CountUp to={n} suffix={suffix} />
               </p>
               <p className="text-xs sm:text-sm text-white/70 mt-1">{t(k)}</p>
