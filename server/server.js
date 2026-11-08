@@ -1,4 +1,5 @@
-require('dotenv').config();
+// One env file for the whole project, at the repo root (absent inside Docker; compose passes env vars)
+require('dotenv').config({ path: require('path').resolve(__dirname, '../.env') });
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
