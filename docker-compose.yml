@@ -1,0 +1,71 @@
+# Nirapad Courier: client (nginx) + API (Express) + MongoDB, routed by Traefik.
+# Copy .env.example to .env and fill it in, then: docker compose up -d --build
+
+services:
+  client:
+    build: ./client
+    restart: unless-stopped
+    networks: [web, internal]
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=${TRAEFIK_NETWORK:-traefik}
+      # HTTPS router for the site
+      - traefik.http.routers.nirapad-web.rule=Host(`${DOMAIN:?set DOMAIN in .env}`)
+      - traefik.http.routers.nirapad-web.entrypoints=${TRAEFIK_ENTRYPOINT:-websecure}
+      - traefik.http.routers.nirapad-web.tls=true
+      - traefik.http.routers.nirapad-web.tls.certresolver=${CERT_RESOLVER:-letsencrypt}
+      - traefik.http.services.nirapad-web.loadbalancer.server.port=80
+      # HTTP -> HTTPS redirect (harmless if you already redirect globally)
+      - traefik.http.routers.nirapad-web-http.rule=Host(`${DOMAIN}`)
+      - traefik.http.routers.nirapad-web-http.entrypoints=${TRAEFIK_HTTP_ENTRYPOINT:-web}
+      - traefik.http.routers.nirapad-web-http.middlewares=nirapad-https
+      - traefik.http.middlewares.nirapad-https.redirectscheme.scheme=https
+      - traefik.http.middlewares.nirapad-https.redirectscheme.permanent=true
+
+  api:
+    build: ./server
+    restart: unless-stopped
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 5001
+      JWT_SECRET: ${JWT_SECRET:?set JWT_SECRET in .env}
+      MONGODB_URI: mongodb://${MONGO_USER:-nirapad}:${MONGO_PASSWORD:?set MONGO_PASSWORD in .env}@mongo:27017/nirapad_courier?authSource=admin
+    networks: [web, internal]
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=${TRAEFIK_NETWORK:-traefik}
+      # Same domain, /api goes to the API (the client calls /api/v1 on its own origin)
+      - traefik.http.routers.nirapad-api.rule=Host(`${DOMAIN}`) && PathPrefix(`/api`)
+      - traefik.http.routers.nirapad-api.priority=100
+      - traefik.http.routers.nirapad-api.entrypoints=${TRAEFIK_ENTRYPOINT:-websecure}
+      - traefik.http.routers.nirapad-api.tls=true
+      - traefik.http.routers.nirapad-api.tls.certresolver=${CERT_RESOLVER:-letsencrypt}
+      - traefik.http.services.nirapad-api.loadbalancer.server.port=5001
+
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER:-nirapad}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:?set MONGO_PASSWORD in .env}
+    volumes:
+      - mongo-data:/data/db
+    networks: [internal]   # not reachable from Traefik or the internet
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+networks:
+  web:
+    name: ${TRAEFIK_NETWORK:-traefik}
+    external: true        # the network your Traefik container is attached to
+  internal:
+
+volumes:
+  mongo-data:
