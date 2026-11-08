@@ -9,9 +9,9 @@ other paths to the React app (nginx). MongoDB is only on the internal network.
    Also set `TRAEFIK_NETWORK`, `TRAEFIK_ENTRYPOINT`, `TRAEFIK_HTTP_ENTRYPOINT` and
    `CERT_RESOLVER` to the names used in your Traefik config
    (`docker network ls` and your Traefik static config show them).
-3. Point the domain's DNS A record at the server.
+3. Add a DNS A record for `nirapadcourier.sequenceit.software` pointing at the server.
 4. `docker compose up -d --build`
-5. Check: `https://DOMAIN/` and `https://DOMAIN/api/v1/health`.
+5. Check: `https://nirapadcourier.sequenceit.software/` and `https://nirapadcourier.sequenceit.software/api/v1/health`.
 
 Update later: `git pull && docker compose up -d --build`.
 Logs: `docker compose logs -f api`.
