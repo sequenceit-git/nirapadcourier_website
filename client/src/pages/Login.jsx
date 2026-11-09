@@ -33,8 +33,8 @@ export default function Login() {
   };
 
   return (
-    <div className="pt-28 pb-20 min-h-screen flex items-center justify-center px-4">
-      <div className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200 shadow-xl max-w-md w-full">
+    <div className="pt-24 sm:pt-28 pb-12 sm:pb-20 min-h-[100dvh] flex items-center justify-center px-4">
+      <div className="bg-white rounded-3xl p-5 sm:p-10 border border-slate-200 shadow-xl max-w-md w-full">
         <div className="text-center mb-8">
           <img src="/logo.png" alt="Nirapad Courier" className="h-9 mx-auto mb-3 object-contain" />
           <h2 className="text-2xl font-black text-slate-900 tracking-tight">Merchant Login</h2>

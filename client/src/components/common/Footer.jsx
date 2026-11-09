@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer id="footer" className="bg-white border-t border-slate-100 pt-8 pb-3">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-8">
           
           {/* Column 1: Brand / About */}
           <div className="lg:col-span-1">
@@ -73,7 +73,7 @@ export default function Footer() {
             <h5 className="font-bold text-brand-dark mb-2.5 text-xs uppercase tracking-wider">{t('footer_col_contact')}</h5>
             <p className="text-xs text-slate-500 mb-1"><strong>Head Office:</strong> Tejgaon I/A, Dhaka-1208</p>
             <p className="text-xs text-slate-500 mb-1"><strong>Helpline:</strong> +880 9612-880088</p>
-            <p className="text-xs text-slate-500 mb-2.5"><strong>Support:</strong> support@nirapadcourier.com.bd</p>
+            <p className="text-xs text-slate-500 mb-2.5"><strong>Support:</strong> <span className="break-all">support@nirapadcourier.com.bd</span></p>
             <div className="px-3 py-2 bg-slate-50 rounded-lg border border-slate-200 text-[11px] text-slate-600 font-medium">
               <span className="block text-slate-900 font-bold mb-0.5">{t('footer_payout_title')}</span>
               bKash, Nagad, Rocket, All Scheduled Bangladeshi Banks

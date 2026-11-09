@@ -98,7 +98,7 @@ function WaybillSlip() {
           <div className="barcode mt-4" />
         </div>
 
-        <div className="slip-stamp absolute -bottom-6 -left-6 w-24 h-24 rounded-full border-[3px] border-brand-red text-brand-red flex items-center justify-center text-center font-display font-extrabold text-[13px] leading-tight bg-white/80 rotate-[-14deg]">
+        <div className="slip-stamp absolute -bottom-6 -left-2 sm:-left-6 w-20 h-20 sm:w-24 sm:h-24 rounded-full border-[3px] border-brand-red text-brand-red flex items-center justify-center text-center font-display font-extrabold text-[13px] leading-tight bg-white/80 rotate-[-14deg]">
           নিরাপদ
           <br />
           Nirapad
@@ -122,7 +122,7 @@ export default function Hero() {
   const headLeading = lang === 'bn' ? 'leading-[1.25]' : 'leading-[1.02]';
 
   return (
-    <section id="hero" className="relative overflow-hidden bg-brand-dark text-white pt-28 lg:pt-32">
+    <section id="hero" className="relative overflow-hidden bg-brand-dark text-white pt-24 sm:pt-28 lg:pt-32">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-8 items-center">
           <div className="lg:col-span-7">
@@ -184,10 +184,10 @@ export default function Hero() {
         </div>
 
         {/* Promises and reach, one ruled strip */}
-        <div className="relative mt-12 lg:mt-16 border-t border-white/20 grid grid-cols-1 md:grid-cols-4 gap-x-6">
+        <div className="relative mt-12 lg:mt-16 border-t border-white/20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-6">
           <Truck aria-hidden="true" className="truck-drive -top-[31px] w-8 h-8 text-white/90" strokeWidth={1.5} />
           {['badge_payout', 'badge_cod', 'badge_return', 'badge_cover'].map((k) => (
-            <p key={k} className="py-4 text-sm font-semibold border-b border-white/10 md:border-b-0">
+            <p key={k} className="py-3 sm:py-4 text-sm font-semibold border-b border-white/10 md:border-b-0">
               {t(k)}
             </p>
           ))}
@@ -198,8 +198,8 @@ export default function Hero() {
             [1, 'K+', 'stat_merchants'],
             [20, 'K+', 'stat_delivered'],
           ].map(([n, suffix, k], i) => (
-            <div key={k} className={`py-5 ${i ? 'pl-4 sm:pl-8' : ''}`}>
-              <p className="font-display font-extrabold text-2xl sm:text-[30px]">
+            <div key={k} className={`py-4 sm:py-5 ${i ? 'pl-3 sm:pl-8' : ''}`}>
+              <p className="font-display font-extrabold text-xl sm:text-[30px]">
                 <CountUp to={n} suffix={suffix} />
               </p>
               <p className="text-xs sm:text-sm text-white/70 mt-1">{t(k)}</p>

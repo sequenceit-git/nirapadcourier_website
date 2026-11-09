@@ -34,27 +34,27 @@ export default function TrackResult() {
   }, [code]);
 
   return (
-    <div className="pt-28 pb-20 min-h-screen max-w-5xl mx-auto px-4 sm:px-6">
+    <div className="pt-24 sm:pt-28 pb-12 sm:pb-20 min-h-screen max-w-5xl mx-auto px-4 sm:px-6">
       <Link to="/" className="inline-flex items-center space-x-2 text-xs font-bold text-brand-green hover:underline mb-6">
         <ArrowLeft className="w-4 h-4" />
         <span>Back to Home</span>
       </Link>
 
       {loading ? (
-        <div className="bg-white rounded-3xl p-12 text-center shadow-sm border border-slate-200">
+        <div className="bg-white rounded-3xl p-8 sm:p-12 text-center shadow-sm border border-slate-200">
           <div className="w-12 h-12 border-4 border-brand-green border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-slate-600 font-bold text-sm">Searching Nirapad Logistics Network for {code}...</p>
         </div>
       ) : error ? (
-        <div className="bg-white rounded-3xl p-10 text-center shadow-sm border border-red-100 max-w-xl mx-auto">
+        <div className="bg-white rounded-3xl p-6 sm:p-10 text-center shadow-sm border border-red-100 max-w-xl mx-auto">
           <div className="w-14 h-14 bg-red-50 text-brand-red rounded-full flex items-center justify-center mx-auto mb-4">
             <AlertCircle className="w-8 h-8" />
           </div>
           <h2 className="text-lg font-extrabold text-slate-800 mb-2">Tracking ID Not Found</h2>
-          <p className="text-xs text-slate-500 mb-6">{error}</p>
+          <p className="text-xs text-slate-500 mb-6 break-words">{error}</p>
           <div className="p-4 bg-slate-50 rounded-2xl text-xs text-slate-600 mb-6 text-left">
             <p className="font-bold mb-1">Try one of our active demo consignments:</p>
-            <div className="flex gap-2 mt-2">
+            <div className="flex flex-wrap gap-2 mt-2">
               <Link to="/track/NC-202611" className="px-3 py-1 bg-white border border-slate-200 rounded-lg font-mono font-bold text-brand-green">
                 NC-202611
               </Link>
@@ -76,7 +76,7 @@ export default function TrackResult() {
                 <Box className="w-3.5 h-3.5" />
                 <span>Tracking Number</span>
               </div>
-              <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-mono">
+              <h1 className="text-xl sm:text-3xl font-black text-slate-900 tracking-tight font-mono break-all">
                 {parcel.trackingCode}
               </h1>
               <p className="text-xs text-slate-500 mt-1">
@@ -112,7 +112,7 @@ export default function TrackResult() {
                       ✓
                     </span>
                     <div>
-                      <div className="flex items-center justify-between">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-0.5 sm:gap-3">
                         <h4 className="text-sm font-extrabold text-slate-900">{item.title}</h4>
                         <span className="text-[11px] text-slate-400">
                           {new Date(item.timestamp).toLocaleDateString()} {new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}

@@ -3,8 +3,23 @@
 @tailwind utilities;
 
 html {
+  -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
   scroll-padding-top: 5.5rem; /* Offset for fixed 80px/88px navbar */
+}
+
+body { overflow-x: hidden; }
+img, svg, video { max-width: 100%; }
+
+/* Inputs below 16px make iOS Safari zoom the page on focus */
+@media (max-width: 767px) {
+  input:not([type='checkbox']):not([type='radio']), select, textarea { font-size: 16px !important; }
+}
+
+/* Keep fixed bars clear of notches / rounded corners */
+@supports (padding: max(0px)) {
+  #header { padding-top: env(safe-area-inset-top); }
+  footer { padding-bottom: max(0.75rem, env(safe-area-inset-bottom)); }
 }
 
 @layer utilities {
@@ -31,6 +46,7 @@ html {
   background: #fff;
   color: #0C1A12;
   transform: rotate(-2deg);
+  max-width: calc(100vw - 3rem);
   box-shadow: 0 40px 70px -28px rgba(0, 0, 0, 0.55);
   border-radius: 6px;
   position: relative;

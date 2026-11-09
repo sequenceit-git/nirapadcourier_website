@@ -34,7 +34,7 @@ export default function Navbar() {
   return (
     <nav id="header" className="fixed w-full z-50 glass border-b border-slate-100/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-20 sm:h-22 items-center">
+        <div className="flex justify-between h-16 sm:h-20 items-center">
           {/* Logo */}
           <div className="flex items-center space-x-3">
             <Link to="/" className="flex items-center">
@@ -43,7 +43,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Nav Items */}
-          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
+          <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
             <a
               href="#services"
               onClick={(e) => handleNavClick(e, 'services')}
@@ -122,16 +122,16 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center space-x-3">
+          <div className="lg:hidden flex items-center space-x-2">
             <button
               onClick={() => setLang(lang === 'en' ? 'bn' : 'en')}
-              className="text-xs font-extrabold px-2.5 py-1 bg-slate-100 rounded-full text-brand-green border border-slate-200"
+              className="text-xs font-extrabold px-3 py-2 bg-slate-100 rounded-full text-brand-green border border-slate-200"
             >
               {lang === 'en' ? 'বাং' : 'EN'}
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-slate-600 p-2 focus:outline-none"
+              className="text-slate-600 p-2 -mr-2 focus:outline-none" aria-expanded={mobileMenuOpen}
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -142,46 +142,46 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-b border-slate-100 px-6 py-4 space-y-3 shadow-lg">
+        <div className="lg:hidden bg-white border-b border-slate-100 px-4 sm:px-6 py-3 shadow-lg max-h-[calc(100dvh-5rem)] overflow-y-auto">
           <a
             href="#services"
             onClick={(e) => handleNavClick(e, 'services')}
-            className="block text-sm font-bold text-slate-700 hover:text-brand-green"
+            className="block py-3 text-base font-bold text-slate-700 hover:text-brand-green border-b border-slate-100"
           >
             {t('nav_services')}
           </a>
           <a
             href="#coverage"
             onClick={(e) => handleNavClick(e, 'coverage')}
-            className="block text-sm font-bold text-slate-700 hover:text-brand-green"
+            className="block py-3 text-base font-bold text-slate-700 hover:text-brand-green border-b border-slate-100"
           >
             {t('nav_coverage')}
           </a>
           <a
             href="#about"
             onClick={(e) => handleNavClick(e, 'about')}
-            className="block text-sm font-bold text-slate-700 hover:text-brand-green"
+            className="block py-3 text-base font-bold text-slate-700 hover:text-brand-green border-b border-slate-100"
           >
             {t('nav_about')}
           </a>
           <a
             href="#process"
             onClick={(e) => handleNavClick(e, 'process')}
-            className="block text-sm font-bold text-slate-700 hover:text-brand-green"
+            className="block py-3 text-base font-bold text-slate-700 hover:text-brand-green border-b border-slate-100"
           >
             {t('nav_process')}
           </a>
           <a
             href="#tracking"
             onClick={(e) => handleNavClick(e, 'tracking')}
-            className="block text-sm font-bold text-slate-700 hover:text-brand-green"
+            className="block py-3 text-base font-bold text-slate-700 hover:text-brand-green border-b border-slate-100"
           >
             {t('nav_tracking')}
           </a>
           <Link
             to={user ? "/merchant" : "/register"}
             onClick={() => setMobileMenuOpen(false)}
-            className="block text-center py-2.5 bg-brand-green text-white rounded-full text-sm font-extrabold shadow-md"
+            className="block text-center mt-3 py-3 bg-brand-green text-white rounded-full text-sm font-extrabold shadow-md"
           >
             {user ? (user.businessName || 'Dashboard') : t('nav_merchant_btn')}
           </Link>
